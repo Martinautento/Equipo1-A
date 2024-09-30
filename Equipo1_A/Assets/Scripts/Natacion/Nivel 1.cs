@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Este script es para que el jugador se mueva hacia arriba o hacia abajo dependiendo de hacia donde deslice el dedo
-// El personaje solo se puede mover en el eje Y hacia 3 posiciones: arriba, en medio y abajo
-// Además, ahora el jugador se mueve hacia adelante al presionar el lado derecho de la pantalla
-// Esto es en un espacio 2D
-
 public class Nivel1 : MonoBehaviour
 {
     private Vector3[] linea; // Posiciones predeterminadas para los 3 carriles
     private int Actual;  // Carril actual del jugador
     private Vector2 PosInicio; // Posición inicial del toque
     private Vector2 PosFin;   // Posición final del toque
-    public float forwardSpeed = 1f; // Velocidad del movimiento hacia adelante
-
+    public float forwardSpeed = 5f; // Velocidad inicial del impulso
+    private float currentSpeed; // Velocidad actual que disminuirá con el tiempo
+    public float friction = 0.95f; // Factor de fricción para desacelerar el impulso
 
     private void Start()
     {
-
         // Definir las posiciones de los tres carriles (solo la posición Y es relevante)
         linea = new Vector3[3];
         linea[0] = new Vector3(0, 3f, 0); // Carril superior (solo Y)
@@ -29,11 +24,13 @@ public class Nivel1 : MonoBehaviour
         // Inicia el jugador en el carril medio
         Actual = 1;
         transform.position = new Vector3(transform.position.x, linea[Actual].y, 0);
+
+        // Inicia la velocidad actual en 0
+        currentSpeed = 0f;
     }
 
     private void Update()
     {
-
         // Detectar input táctil
         if (Input.touchCount > 0)
         {
@@ -44,9 +41,8 @@ public class Nivel1 : MonoBehaviour
                 // Verificar si el toque ocurre en el lado derecho de la pantalla
                 if (touch.position.x > Screen.width / 2)
                 {
-                        MoveForward(); // Mover hacia adelante si se toca el lado derecho
-                    
-                    
+                    // Aplicar un impulso hacia adelante
+                    MoveForward();
                 }
                 else
                 {
@@ -54,19 +50,20 @@ public class Nivel1 : MonoBehaviour
                     PosInicio = touch.position;
                 }
             }
-            else if (touch.phase == UnityEngine.TouchPhase.Ended && touch.position.x < Screen.width / 2)
-            {
+        }
 
-            }
+        // Aplicar la fricción al movimiento
+        if (currentSpeed > 0)
+        {
+            currentSpeed *= friction; // Reducir la velocidad con el tiempo
+            transform.position += new Vector3(currentSpeed * Time.deltaTime, 0, 0); // Mover el jugador
         }
     }
 
-
-
-    // Mover el jugador hacia adelante en el eje X
+    // Mover el jugador hacia adelante con un impulso
     private void MoveForward()
     {
-            // Mover al jugador hacia adelante
-            transform.position += new Vector3(forwardSpeed, 0, 0);
+        // Dar un impulso inicial
+        currentSpeed = forwardSpeed;
     }
 }
