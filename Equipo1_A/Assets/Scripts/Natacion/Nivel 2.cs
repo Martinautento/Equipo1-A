@@ -16,6 +16,8 @@ public class Nivel2_0 : MonoBehaviour
     private Vector2 PosInicio; // Posición inicial del toque
     private Vector2 PosFin;   // Posición final del toque
     public float forwardSpeed = 1f; // Velocidad del movimiento hacia adelante
+    private float currentSpeed; // Velocidad actual que disminuirá con el tiempo
+    public float friction = 0.95f; // Factor de fricción para desacelerar el impulso
 
 
     private void Start()
@@ -30,6 +32,8 @@ public class Nivel2_0 : MonoBehaviour
         // Inicia el jugador en el carril medio
         Actual = 1;
         transform.position = new Vector3(transform.position.x, linea[Actual].y, 0);
+
+        currentSpeed = 0f;
     }
 
     private void Update()
@@ -80,6 +84,12 @@ public class Nivel2_0 : MonoBehaviour
                 swipeDeltaY = 0;
             }
         }
+        // Aplicar la fricción al movimiento
+        if (currentSpeed > 0)
+        {
+            currentSpeed *= friction; // Reducir la velocidad con el tiempo
+            transform.position += new Vector3(currentSpeed * Time.deltaTime, 0, 0); // Mover el jugador
+        }
     }
 
     // Mover el jugador hacia arriba (si no está ya en el carril superior)
@@ -112,7 +122,7 @@ public class Nivel2_0 : MonoBehaviour
     // Mover el jugador hacia adelante en el eje X
     private void MoveForward()
     {
-            // Mover al jugador hacia adelante
-            transform.position += new Vector3(forwardSpeed, 0, 0);
+         // Dar un impulso inicial
+        currentSpeed = forwardSpeed;
     }
 }
