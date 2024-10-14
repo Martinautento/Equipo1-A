@@ -17,6 +17,8 @@ public class Nivel2 : MonoBehaviour
     private Vector2 PosFin;   // Posición final del toque
     public float forwardSpeed = 1f; // Velocidad del movimiento hacia adelante
     private PlayerStamina playerStamina;
+    private float currentSpeed; // Velocidad actual que disminuirá con el tiempo
+    public float friction = 0.95f; // Factor de fricción para desacelerar el impulso
 
     private void Start()
     {
@@ -32,6 +34,8 @@ public class Nivel2 : MonoBehaviour
         // Inicia el jugador en el carril medio
         Actual = 1;
         transform.position = new Vector3(transform.position.x, linea[Actual].y, 0);
+
+        currentSpeed = 0f;
     }
 
     private void Update()
@@ -85,6 +89,13 @@ public class Nivel2 : MonoBehaviour
                 swipeDeltaY = 0;
             }
         }
+
+        // Aplicar la fricción al movimiento
+        if (currentSpeed > 0)
+        {
+            currentSpeed *= friction; // Reducir la velocidad con el tiempo
+            transform.position += new Vector3(currentSpeed * Time.deltaTime, 0, 0); // Mover el jugador
+        }
     }
 
     // Mover el jugador hacia arriba (si no está ya en el carril superior)
@@ -117,13 +128,6 @@ public class Nivel2 : MonoBehaviour
     // Mover el jugador hacia adelante en el eje X
     private void MoveForward()
     {
-        /*
-        // Drenar stamina al moverse hacia adelante
-        playerStamina.DrainStamina(playerStamina.staminaDrainRate);//stamina
-
-        // Mover hacia adelante
-        transform.position += new Vector3(forwardSpeed, 0, 0);
-        */
 
     // Verificar si la stamina restante es suficiente para moverse
         if (playerStamina.currentStamina >= playerStamina.staminaDrainRate)
@@ -132,7 +136,7 @@ public class Nivel2 : MonoBehaviour
             playerStamina.DrainStamina(playerStamina.staminaDrainRate);
 
             // Mover al jugador hacia adelante
-            transform.position += new Vector3(forwardSpeed, 0, 0);
+            currentSpeed = forwardSpeed;
         }
         else
         {
