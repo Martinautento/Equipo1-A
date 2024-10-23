@@ -6,17 +6,17 @@ public class GolpeoPelota : MonoBehaviour
 {
     public float fuerzaGolpe = 10f; // Fuerza con la que se golpea la pelota
     public Transform bateador; // Referencia al bateador
-    public List<GameObject> objetosPrefab; // Lista de prefabs que pueden lanzarse (pelotas u otros objetos)
-    public Transform lanzador; // Posición del lanzador
+    //public List<GameObject> objetosPrefab; // Lista de prefabs que pueden lanzarse (pelotas u otros objetos)
+    //public Transform lanzador; // Posición del lanzador
 
     private Rigidbody2D rbPelota;
     private bool pelotaEnRango = false;
 
     // Pooling
-    public int poolSize = 10; // Tamaño del pool
-    private List<GameObject> pool; // Pool de objetos
-    private float tiempoMinimoLanzamiento = 3f;
-    private float tiempoMaximoLanzamiento = 5f;
+    //public int poolSize = 10; // Tamaño del pool
+    //private List<GameObject> pool; // Pool de objetos
+    //private float tiempoMinimoLanzamiento = 3f;
+    //private float tiempoMaximoLanzamiento = 5f;
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class GolpeoPelota : MonoBehaviour
         {
             bateador = this.transform;
         }
-
+        /*
         // Inicializar el pool de objetos
         pool = new List<GameObject>();
         for (int i = 0; i < poolSize; i++)
@@ -36,7 +36,7 @@ public class GolpeoPelota : MonoBehaviour
         }
 
         // Iniciar la corrutina para lanzar objetos
-        StartCoroutine(LanzarObjetos());
+        StartCoroutine(LanzarObjetos());*/
     }
 
     void Update()
@@ -67,7 +67,7 @@ public class GolpeoPelota : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Comprobar si el objeto con el que se colisiona es una pelota u otro objeto del pool
-        if (other.CompareTag("Pelota") || objetosPrefab.Contains(other.gameObject))
+        if (other.CompareTag("Pelota")|| other.CompareTag("Tomate"))
         {
             rbPelota = other.GetComponent<Rigidbody2D>();
             pelotaEnRango = true;
@@ -79,7 +79,7 @@ public class GolpeoPelota : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         // Cuando el objeto sale del rango de bateo
-        if (other.CompareTag("Pelota") || objetosPrefab.Contains(other.gameObject))
+        if (other.CompareTag("Pelota") || other.CompareTag("Tomate"))
         {
             rbPelota = null;
             pelotaEnRango = false;
@@ -102,7 +102,9 @@ public class GolpeoPelota : MonoBehaviour
         }
     }
 
-    IEnumerator LanzarObjetos()
+    //-----------------------------------------------------------------------------------
+    //Cosas del anterior algoritmo de pooling (No me gusto como quedo entonces hice otro '<')
+    /*IEnumerator LanzarObjetos()
     {
         // Retardo inicial antes de lanzar la primera pelota
         float tiempoInicial = Random.Range(tiempoMinimoLanzamiento, tiempoMaximoLanzamiento);
@@ -128,9 +130,9 @@ public class GolpeoPelota : MonoBehaviour
             float tiempoLanzamiento = Random.Range(tiempoMinimoLanzamiento, tiempoMaximoLanzamiento);
             yield return new WaitForSeconds(tiempoLanzamiento);
         }
-    }
+    }*/
 
-    GameObject ObtenerObjetoDelPool()
+    /*GameObject ObtenerObjetoDelPool()
     {
         // Buscar un objeto en el pool que esté desactivado y devolverlo
         foreach (GameObject obj in pool)
@@ -141,9 +143,9 @@ public class GolpeoPelota : MonoBehaviour
             }
         }
         return null; // No hay objetos disponibles en el pool
-    }
+    }*/
 
-    void OnBecameInvisible()
+    /*void OnBecameInvisible()
     {
         // Desactivar el objeto cuando salga de la pantalla
         if (rbPelota != null && !rbPelota.gameObject.activeInHierarchy)
@@ -151,5 +153,5 @@ public class GolpeoPelota : MonoBehaviour
             rbPelota.gameObject.SetActive(false);
             Debug.Log("Objeto desactivado al salir de la pantalla.");
         }
-    }
+    }*/
 }
