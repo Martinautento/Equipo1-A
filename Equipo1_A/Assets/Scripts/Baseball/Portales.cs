@@ -46,14 +46,16 @@ public class Portales : MonoBehaviour
         if (collision.CompareTag("Pelota") || collision.CompareTag("Tomate"))
         {
             pass++;
+            if(pass== cantidadPelotas -1){
+                // Activa los SpriteRenderers de entrada y salida para indicar que el portal está activo
+                spriteRendererEntrada.enabled = true;
+                
+            }
 
             // Si la variable pass es igual a cantidadPelotas, activa el portal
             if (pass == cantidadPelotas)
             {
-                // Activa los SpriteRenderers de entrada y salida para indicar que el portal está activo
-                spriteRendererEntrada.enabled = true;
                 spriteRendererSalida.enabled = true;
-
                 // Obtiene el Rigidbody2D de la pelota y guarda su velocidad
                 Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
                 velocidad = rb.velocity;
@@ -62,7 +64,7 @@ public class Portales : MonoBehaviour
                 collision.transform.position = portalConectado.position;
 
                 // Cambia la dirección de la velocidad
-                rb.velocity = -velocidad;
+                rb.velocity = -velocidad * 0.75f;
 
                 // Reinicia el contador de pelotas y desactiva el estado de activación
                 pass = 0;
@@ -77,15 +79,16 @@ public class Portales : MonoBehaviour
     // Método para establecer un número aleatorio de pelotas que deben pasar
     private void EstablecerNumeroPelotas()
     {
-        cantidadPelotas = Random.Range(1, 5);
+        cantidadPelotas = Random.Range(1, 10);
         x = true;
     }
 
     // Corrutina para desactivar los SpriteRenderers después de un corto retraso
     private IEnumerator DesactivarSprites()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         spriteRendererEntrada.enabled = false;
         spriteRendererSalida.enabled = false;
     }
+
 }
