@@ -33,7 +33,7 @@ public class Lanzamiento : MonoBehaviour
         if (Time.time >= tiempoProximoLanzamiento)
         {
             Lanzar();
-            tiempoProximoLanzamiento = Time.time + Random.Range(1, 3);
+            tiempoProximoLanzamiento = Time.time + Random.Range(1f, 3f);
         }
     }
 
