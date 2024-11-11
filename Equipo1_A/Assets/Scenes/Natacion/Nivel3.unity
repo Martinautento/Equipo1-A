@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 10
-  friction: 0.98
+  friction: 0.998
 --- !u!4 &1572150966
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 10
-  friction: 0.98
+  friction: 0.998
   xposicion: 0
 --- !u!212 &1770003890
 SpriteRenderer:
