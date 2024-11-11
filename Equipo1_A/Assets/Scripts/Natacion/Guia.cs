@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Nivel1 : MonoBehaviour
+public class Guia : MonoBehaviour
 {
+    
     private Vector3[] linea; // Posiciones predeterminadas para los 3 carriles
     private int Actual;  // Carril actual del jugador
     private Vector2 PosInicio; // Posición inicial del toque
@@ -67,3 +67,4 @@ public class Nivel1 : MonoBehaviour
         currentSpeed = forwardSpeed;
     }
 }
+
