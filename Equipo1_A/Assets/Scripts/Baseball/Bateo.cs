@@ -13,6 +13,8 @@ public class GolpeoPelota : MonoBehaviour
     private bool pelotaEnRango = false;
     private bool finJuego = false;
 
+    public GolpeoPelota2 Player;        // Referencia al script de golpeo
+
     // Pooling
     //public int poolSize = 10; // Tamaño del pool
     //private List<GameObject> pool; // Pool de objetos
@@ -113,6 +115,10 @@ public class GolpeoPelota : MonoBehaviour
     {
         finJuego = true;
         Debug.Log("Fin del juego.");
+        if(Player != null)
+        {
+            Player.FinJuego();
+        }
     }
 
     //-----------------------------------------------------------------------------------
