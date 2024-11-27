@@ -12,7 +12,7 @@ public class Guia3 : MonoBehaviour
 {
     private Vector3[] linea; // Posiciones predeterminadas para los 3 carriles
     private int Actual;  // Carril actual del jugador
-    private float Deslizado = 50f; // Mínimo movimiento en píxeles para ser considerado un swipe
+   
     private Vector2 PosInicio; // Posición inicial del toque
     private Vector2 PosFin;   // Posición final del toque
     public float forwardSpeed = 1f; // Velocidad del movimiento hacia adelante

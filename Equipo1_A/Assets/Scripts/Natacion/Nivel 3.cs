@@ -28,9 +28,9 @@ public class Nivel2 : MonoBehaviour
 
         // Definir las posiciones de los tres carriles (solo la posición Y es relevante)
         linea = new Vector3[3];
-        linea[0] = new Vector3(1.6f, 1.2f, 0); // Carril superior (solo Y)
+        linea[0] = new Vector3(0, 1.2f, 0); // Carril superior (solo Y)
         linea[1] = new Vector3(0, -1.2f, 0); // Carril medio (solo Y)
-        linea[2] = new Vector3(-2.8f, -3.8f, 0); // Carril inferior (solo Y)
+        linea[2] = new Vector3(0, -3.8f, 0); // Carril inferior (solo Y)
 
         // Inicia el jugador en el carril medio
         Actual = 1;
@@ -152,5 +152,22 @@ public class Nivel2 : MonoBehaviour
         }
 
 
+    }
+
+    // Metodo para detectar la colision con una ola
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "ola")
+        {
+            // Si el jugador colisiona con una ola, se reinicia la velocidad
+            currentSpeed = -forwardSpeed * 5f;
+            //Empuja al jugador hacia atrás
+            transform.position += new Vector3(currentSpeed * Time.deltaTime, 0, 0);
+        }
+        //Si el jugador colisiona con stamina, se recarga la stamina
+        if (collision.gameObject.tag == "Stamina")
+        {
+            playerStamina.RechargeStaminaObj();
+        }
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Lanzador
   - Limite
   - ola
+  - Stamina
   layers:
   - Default
   - TransparentFX
