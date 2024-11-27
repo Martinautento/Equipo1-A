@@ -9,6 +9,7 @@ TagManager:
   - Limite
   - ola
   - Stamina
+  - GeneradorNat
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 // Este script es para que el jugador se mueva hacia arriba o hacia abajo dependiendo de hacia donde deslice el dedo
 // El personaje solo se puede mover en el eje Y hacia 3 posiciones: arriba, en medio y abajo
 // Además, ahora el jugador se mueve hacia adelante al presionar el lado derecho de la pantalla
@@ -19,7 +20,7 @@ public class Nivel2_0 : MonoBehaviour
     private float currentSpeed; // Velocidad actual que disminuirá con el tiempo
     public float friction = 0.95f; // Factor de fricción para desacelerar el impulso
     public float xposicion = 0f;
-
+    private bool Fin=false;
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class Nivel2_0 : MonoBehaviour
 
     private void Update()
     {
+        if(Fin==false){
 
         // Detectar input táctil
         if (Input.touchCount > 0)
@@ -86,7 +88,9 @@ public class Nivel2_0 : MonoBehaviour
                 swipeDeltaY = 0;
             }
         }
-        // Aplicar la fricción al movimiento
+        
+    }
+    // Aplicar la fricción al movimiento
         if (currentSpeed > 0)
         {
             currentSpeed *= friction; // Reducir la velocidad con el tiempo
@@ -144,6 +148,11 @@ public class Nivel2_0 : MonoBehaviour
             currentSpeed = -forwardSpeed * 5f;
             //Empuja al jugador hacia atrás
             transform.position += new Vector3(currentSpeed * Time.deltaTime, 0, 0);
+        }
+        //Si el juegador colisiona con el fin del nivel
+        if (collision.gameObject.tag == "Finish")
+        {
+            Fin=true;
         }
     }
 }
