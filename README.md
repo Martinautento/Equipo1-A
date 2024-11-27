@@ -5,7 +5,7 @@ Equipo 1
 #### Integrantes
 * Martín Autento López - Manager
 * Carlos Eduardo Vences Santillán - Artista
-* Fernando David Martínez - Coder
+* Fernando David Martínez Navarro- Coder
 * Elías Angulo Torres - Coder
 * Owen Bailón Cruz - Escritor
 
