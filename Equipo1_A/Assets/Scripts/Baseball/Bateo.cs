@@ -8,9 +8,12 @@ public class GolpeoPelota : MonoBehaviour
     public Transform bateador; // Referencia al bateador
     //public List<GameObject> objetosPrefab; // Lista de prefabs que pueden lanzarse (pelotas u otros objetos)
     //public Transform lanzador; // Posición del lanzador
-
+    public Puntaje Puntos; // Referencia al script de puntaje
     private Rigidbody2D rbPelota;
     private bool pelotaEnRango = false;
+    private bool finJuego = false;
+
+    public GolpeoPelota2 Player;        // Referencia al script de golpeo
 
     // Pooling
     //public int poolSize = 10; // Tamaño del pool
@@ -89,16 +92,32 @@ public class GolpeoPelota : MonoBehaviour
 
     void GolpearPelota()
     {
-        if (pelotaEnRango && rbPelota != null)
+        if(!finJuego){
+            if (pelotaEnRango && rbPelota != null)
+            {
+                // Aplicar una fuerza hacia la derecha en un ángulo de 45 grados
+                Vector2 direccionGolpe = new Vector2(1f, 1f).normalized; // 45 grados
+                rbPelota.velocity = direccionGolpe * fuerzaGolpe;
+                Debug.Log("¡Objeto bateado!");
+                Puntos.AgregaPuntaje(10);  // Añade 10 puntos si se cumple la condición
+            }
+            else
+            {
+                Debug.Log("No hay objeto en rango para batear.");
+            }
+        }else
         {
-            // Aplicar una fuerza hacia la derecha en un ángulo de 45 grados
-            Vector2 direccionGolpe = new Vector2(1f, 1f).normalized; // 45 grados
-            rbPelota.velocity = direccionGolpe * fuerzaGolpe;
-            Debug.Log("¡Objeto bateado!");
+            Debug.Log("El juego ha terminado.");
         }
-        else
+    }
+    //Funcion para terminar el juego
+    public void FinJuego()
+    {
+        finJuego = true;
+        Debug.Log("Fin del juego.");
+        if(Player != null)
         {
-            Debug.Log("No hay objeto en rango para batear.");
+            Player.FinJuego();
         }
     }
 

@@ -9,9 +9,11 @@ public class Fin : MonoBehaviour
     private void Start() {
         victoria.SetActive(false);
     }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Colisión detectada con el jugador");
             victoria.SetActive(true);
         }
     }

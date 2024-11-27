@@ -8,6 +8,8 @@ public class GolpeoPelota2 : MonoBehaviour
     public Transform bateador; // Referencia al bateador
     private Rigidbody2D rbPelota;
     private bool pelotaEnRango = false;
+    private bool finJuego = false;
+    public Puntaje Puntos; // Referencia al script de puntaje
 
     void Start()
     {
@@ -56,16 +58,25 @@ public class GolpeoPelota2 : MonoBehaviour
 
     void GolpearPelota()
     {
-        if (pelotaEnRango && rbPelota != null)
-        {
-            // Aplicar una fuerza hacia la izquierda en un ángulo de 135 grados
-            Vector2 direccionGolpe = new Vector2(-1f, 1f).normalized; // 135 grados
-            rbPelota.velocity = direccionGolpe * fuerzaGolpe;
-            Debug.Log("¡Objeto bateado!");
+        if(!finJuego){
+            if (pelotaEnRango && rbPelota != null)
+            {
+                // Aplicar una fuerza hacia la izquierda en un ángulo de 135 grados
+                Vector2 direccionGolpe = new Vector2(-1f, 1f).normalized; // 135 grados
+                rbPelota.velocity = direccionGolpe * fuerzaGolpe;
+                Debug.Log("¡Objeto bateado!");
+                Puntos.AgregaPuntaje(10);  // Añade 10 puntos si se cumple la condición
+            }
+            else
+            {
+                Debug.Log("No hay objeto en rango para batear.");
+            }
         }
-        else
-        {
-            Debug.Log("No hay objeto en rango para batear.");
-        }
+    }
+
+    // Función para finalizar el juego
+    public void FinJuego()
+    {
+        finJuego = true;
     }
 }

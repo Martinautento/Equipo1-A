@@ -181,7 +181,6 @@ public class Nivel2 : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {
             Fin=true;
-
         }
     }
 }
