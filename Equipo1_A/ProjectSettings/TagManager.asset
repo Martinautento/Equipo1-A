@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Pelota
   - Lanzador
+  - Limite
+  - ola
+  - Stamina
+  - GeneradorNat
   layers:
   - Default
   - TransparentFX

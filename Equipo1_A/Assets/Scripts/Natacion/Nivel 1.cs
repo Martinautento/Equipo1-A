@@ -17,9 +17,9 @@ public class Nivel1 : MonoBehaviour
     {
         // Definir las posiciones de los tres carriles (solo la posición Y es relevante)
         linea = new Vector3[3];
-        linea[0] = new Vector3(0, 3f, 0); // Carril superior (solo Y)
-        linea[1] = new Vector3(0, 0f, 0); // Carril medio (solo Y)
-        linea[2] = new Vector3(0, -3f, 0); // Carril inferior (solo Y)
+        linea[0] = new Vector3(0, 1.2f, 0); // Carril superior (solo Y)
+        linea[1] = new Vector3(0, -1.2f, 0); // Carril medio (solo Y)
+        linea[2] = new Vector3(0, -3.8f, 0); // Carril inferior (solo Y)
 
         // Inicia el jugador en el carril medio
         Actual = 1;
