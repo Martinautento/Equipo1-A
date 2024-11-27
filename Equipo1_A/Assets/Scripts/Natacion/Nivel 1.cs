@@ -12,6 +12,8 @@ public class Nivel1 : MonoBehaviour
     public float forwardSpeed = 5f; // Velocidad inicial del impulso
     private float currentSpeed; // Velocidad actual que disminuirá con el tiempo
     public float friction = 0.95f; // Factor de fricción para desacelerar el impulso
+    private bool Fin=false;
+    
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class Nivel1 : MonoBehaviour
 
     private void Update()
     {
+        if(Fin==false){
         // Detectar input táctil
         if (Input.touchCount > 0)
         {
@@ -51,13 +54,14 @@ public class Nivel1 : MonoBehaviour
                 }
             }
         }
-
+        }
         // Aplicar la fricción al movimiento
         if (currentSpeed > 0)
         {
             currentSpeed *= friction; // Reducir la velocidad con el tiempo
             transform.position += new Vector3(currentSpeed * Time.deltaTime, 0, 0); // Mover el jugador
         }
+        
     }
 
     // Mover el jugador hacia adelante con un impulso
@@ -65,5 +69,18 @@ public class Nivel1 : MonoBehaviour
     {
         // Dar un impulso inicial
         currentSpeed = forwardSpeed;
+    }
+
+    //Metodo para detectar la colision con el final
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+            
+            Fin=true;
+            // Mostrar mensaje de victoria
+
+            Debug.Log("¡Nivel completado!");
+        }
     }
 }
