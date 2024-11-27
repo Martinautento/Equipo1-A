@@ -5,10 +5,14 @@ using UnityEngine;
 public class Fin : MonoBehaviour
 {
     public GameObject victoria;
-    
-    //Activa el mensaje de victoria de la pantalla
-    public void ActivarVictoria()
-    {
-        victoria.SetActive(true);
+
+    private void Start() {
+        victoria.SetActive(false);
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player"))
+        {
+            victoria.SetActive(true);
+        }
     }
 }

@@ -71,4 +71,13 @@ public class GeneradorOlas : MonoBehaviour
             }
         }
     }
+
+    //Metodo para desactivar el generador de olas cuando colisione con el final
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
