@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fin : MonoBehaviour
 {
     public GameObject victoria;
+    public CronometroNat cronometro;
 
     private void Start() {
         victoria.SetActive(false);
@@ -14,6 +15,7 @@ public class Fin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Colisión detectada con el jugador");
+            cronometro.DetenerCronometro();
             victoria.SetActive(true);
         }
     }

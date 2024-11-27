@@ -29,4 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Baseball/Nivel3B.unity
     guid: 5a488b5f333d1ef40ad04f0aacbc5150
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 3dce88c0f4ca2e24383456e3ed1e0b65, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 445ad5d469ca68849ad6c18d605a873d, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 18cde8efe1882664c883f5af35266776, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 991db6319fc8a2c4b95c209ebebec655, type: 2}
