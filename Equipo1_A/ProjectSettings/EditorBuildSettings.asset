@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes elias/Menu.unity
     guid: ffaef519b6aaf9e439a6c4159d5980ad
   - enabled: 1
-    path: Assets/Scenes/Natacion/Nivel1.unity
+    path: Assets/Scenes/Natacion/Nivel1N.unity
     guid: 69b4ad01382f30b48b468c732eff0495
   - enabled: 1
     path: Assets/Scenes/Baseball/Nivel1B.unity
