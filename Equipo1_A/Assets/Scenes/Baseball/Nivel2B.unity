@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e1b5da65f0b884fb242d6cfb287077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 5
+  timeRemaining: 60
   timerText: {fileID: 1258817630}
   endPanel: {fileID: 262972579}
   Player: {fileID: 1315980845}
